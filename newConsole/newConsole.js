@@ -1,67 +1,28 @@
 'use strict'
 
-class SecondConsole {
+let log = console.log;
 
-    log(item, ...optionalItems) {
-        if (typeof console != "undefined" && console.log) {
-            if (optionalItems.length != 0) {
-                console.log(item, optionalItems);
-            } else {
-                console.log(item);
-            }
-
-        }
-        localStorage.setItem('last log', item);
-
-        if (optionalItems.length != 0) {
-            let arr = optionalItems;
-            for (let i = 0; i < arr.length; i++) {
-                localStorage.setItem('last warn #' + (i + 2), arr[i]);
-            }
-        }
-    }
-
-    error(item, ...optionalItems) {
-        if (typeof console != "undefined" && console.error) {
-            if (optionalItems.length != 0) {
-                console.error(item, optionalItems);
-            } else {
-                console.error(item);
-            }
-        }
-        localStorage.setItem('last error', item);
-
-        if (optionalItems.length != 0) {
-            let arr = optionalItems;
-            for (let i = 0; i < arr.length; i++) {
-                localStorage.setItem('last warn #' + (i + 2), arr[i]);
-            }
-        }
-    }
-
-    warn(item, ...optionalItems) {
-        if (typeof console != "undefined" && console.warn) {
-            if (optionalItems.length != 0) {
-                console.warn(item, optionalItems);
-            } else {
-                console.warn(item);
-            }
-        }
-        localStorage.setItem('last warn', item);
-
-        if (optionalItems.length != 0) {
-            let arr = optionalItems;
-            for (let i = 0; i < arr.length; i++) {
-                localStorage.setItem('last warn #' + (i + 2), arr[i]);
-            }
-        }
-    }
+console.log = function() {
+    log.apply(this, Array.prototype.slice.call(arguments));
+    localStorage.setItem("Last log", Array.prototype.slice.call(arguments));
 }
 
-let sndConsole = new SecondConsole();
+let error = console.error;
+
+console.error = function() {
+    error.apply(this, Array.prototype.slice.call(arguments));
+    localStorage.setItem("Last error", Array.prototype.slice.call(arguments));
+}
+
+let warn = console.warn;
+
+console.warn = function() {
+    warn.apply(this, Array.prototype.slice.call(arguments));
+    localStorage.setItem("Last warn", Array.prototype.slice.call(arguments));
+}
 
 window.onload = function() {
-    sndConsole.log("hello log");
-    sndConsole.warn("1st warn", "2nd warn", "3rd warn");
-    sndConsole.error("test error");
+    console.log("hello", { name: "Ivan" }, 1);
+    console.error("New error", { error: "No information given!" });
+    console.warn("beware the js", { joke: true });
 }
