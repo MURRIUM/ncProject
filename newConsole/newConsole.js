@@ -4,7 +4,7 @@ for (let key in console) {
     let con = console[key];
     console[key] = function() {
         con.apply(this, Array.prototype.slice.call(arguments));
-        localStorage.setItem("Message", Array.prototype.slice.call(arguments));
+        localStorage.setItem(key, Array.prototype.slice.call(arguments));
     }
 }
 
