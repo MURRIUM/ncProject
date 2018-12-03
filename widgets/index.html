@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Widget</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script async src="widget.js"></script>
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+
+<body>
+    <div>TODO:</div>
+    <ul id='todo'>
+    </ul>
+    <button onclick="showAddMenu()">
+    Add new
+    </button>
+    <button onclick="saveChangesInLS()">Save changes</button>
+    <button onclick="deleteChecked()">Delete checked</button>
+
+    <form id="addNewForm">
+        Note
+        <input type="text" id="note"> Done
+        <input type="checkbox" id="done">
+        <button onclick="newNote()">Submit</button>
+    </form>
+</body>
+
+</html>
